@@ -7,6 +7,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * This class manager a fixed timed repeat check function.
  * Useful when you need to check periodically.
+ *
+ * v1.0.0
+ *
  */
 @SuppressWarnings("unused")
 public abstract class ScChecker {

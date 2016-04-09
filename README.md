@@ -3,6 +3,10 @@ This is a library of utilities classes
 
 - **[ScChecker](ScChecker.md)**<br />
 This is very simple class that periodically repeat a check method.
+- **[ScLocationService](ScLocationService.md)**<br />
+Retrieve the location manager and for maintain checked the location accessibility.
+- **[ScNetworkService](ScNetworkService.md)**<br />
+Retrieve the connectivity manager and for maintain checked the connectivity status.
 
 # Usage
 
