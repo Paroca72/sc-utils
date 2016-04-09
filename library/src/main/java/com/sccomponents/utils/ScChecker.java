@@ -20,7 +20,7 @@ public abstract class ScChecker {
     private long mCheckRate = 1000;                     // Check rate
     private Modes mMode = Modes.FIXED_DELAY;            // The check mode type
     private Boolean mLastState = null;                  // Hold the last result state
-    private CheckerListener mListener = null;             // The listener
+    private CheckerListener mListener = null;           // The listener
 
 
     /**

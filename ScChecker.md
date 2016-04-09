@@ -40,6 +40,17 @@ Attach the listener.
     }
 ```
 
+### Overridable methods
+Since this class must be extended you can override some methods for your scope. 
+
+- **public void onSuccess()**<br />
+Called on success (when <code>check()</code> methods return <code>true</code>).
+- **public void onFail()**<br />
+Called on fail (when <code>check()</code> methods return <code>false</code>).
+- **public void onChangeState(boolean result)**<br />
+Called on status change. The <code>result</code> variable contain the <code>check()</code> returned value.
+
+
 ### Example
 For an example please take a look the demo section in the project structure.
 
