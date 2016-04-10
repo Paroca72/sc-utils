@@ -39,21 +39,21 @@ public class ScLocationService extends ScChecker {
      * Public methods
      */
 
-    // Check is able a networkService connection
+    // Check is able to find the location by network
     @SuppressWarnings("unused")
     public boolean isNetworkEnabled() {
         // Find the manager
         LocationManager manager = this.getLocationManager();
-        // Check if the location via networkService is enabled
+        // Check if the location via network
         return manager != null && manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    // Check is able a LocationService connection
+    // Check is able to find the location by GPS
     @SuppressWarnings("unused")
     public boolean isGPSEnabled() {
         // Find the manager
         LocationManager manager = this.getLocationManager();
-        // Check if the location via LocationService is enabled
+        // Check if the location via GPS
         return manager != null && manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
