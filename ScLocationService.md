@@ -8,9 +8,9 @@ Through the listener implementation you can know when the location accessibility
 - **ConnectivityManager getConnectivityManager()**<br />
 Return the connectivity manager when available.
 - **boolean isNetworkEnabled()**<br />
-<code>true</code> if the network is enabled.
+<code>true</code> if able to find the location by the network.
 - **boolean isGPSEnabled()**<br />
-<code>true</code> if the GPS is enabled.
+<code>true</code> if able to find the location by the GPS.
 - **boolean check()**<br />
 <code>true</code> if is possible to retrieve the current location.
 
