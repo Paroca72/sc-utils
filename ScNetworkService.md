@@ -4,6 +4,12 @@ This class inherit from the [ScChecker](ScChecker.md).
 <br />
 Through the listener implementation you can know when the connectivity status changed.
 
+> **PERMISSIONS**
+> This classes need of network user permission.
+> Please remember to add the follow line on your manifest:
+>
+> <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
 #### Methods
 - **ConnectivityManager getConnectivityManager()**<br />
 Return the connectivity manager when available.
