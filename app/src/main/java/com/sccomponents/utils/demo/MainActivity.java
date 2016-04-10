@@ -1,18 +1,15 @@
 package com.sccomponents.utils.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sccomponents.utils.ScChecker;
-
-public class MainActivity extends AppCompatActivity {
-
-    // Holder
-    private MyChecker mChecker = null;
-    private TextView mText = null;
+public class MainActivity
+        extends AppCompatActivity
+        implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,53 +17,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get the text component
-        this.mText = (TextView) this.findViewById(R.id.text1);
+        // Buttons events
+        Button genericChecker = (Button) this.findViewById(R.id.btnScChecker);
+        genericChecker.setOnClickListener(this);
 
-        // Create the checker
-        this.mChecker = new MyChecker(this);
-        // Check every 3 seconds
-        this.mChecker.setCheckRate(3000);
-        // Listener
-        this.mChecker.setCheckerListener(new ScChecker.CheckerListener() {
-            @Override
-            public void onSuccess() {
-                // If the check return true
-                MainActivity.this.write("Still true");
-            }
+        Button locationChecker = (Button) this.findViewById(R.id.btnScLocationService);
+        locationChecker.setOnClickListener(this);
 
-            @Override
-            public void onFail() {
-                // If the check return false
-                MainActivity.this.write("Still false");
-            }
-
-            @Override
-            public void onChangeState(boolean result) {
-                // If the check return true
-                MainActivity.this.write("Now changed to " + result);
-            }
-        });
-
-        // Apply on click event on the button
-        Button button = (Button) this.findViewById(R.id.button1);
-        assert button != null;
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Start to check
-                MainActivity.this.mChecker.start();
-            }
-        });
+        Button networkChecker = (Button) this.findViewById(R.id.btnScNetworkService);
+        networkChecker.setOnClickListener(this);
     }
 
-    // Write on screen
-    private void write(final String text) {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                MainActivity.this.mText.setText(text);
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        // Generic intent
+        Intent generic = null;
+
+        // Selector
+        switch (v.getId()) {
+            // Generic
+            case R.id.btnScChecker:
+                generic = new Intent(this, GenericChecker.class);
+                break;
+
+            // Location
+            case R.id.btnScLocationService:
+                generic = new Intent(this, LocationChecker.class);
+                break;
+
+            // Network
+            case R.id.btnScNetworkService:
+                generic = new Intent(this, NetworkChecker.class);
+                break;
+        }
+
+        // Start
+        this.startActivity(generic);
     }
 }

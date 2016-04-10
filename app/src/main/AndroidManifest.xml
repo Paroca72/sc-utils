@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.sccomponents.utils.demo"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.sccomponents.utils.demo"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -14,6 +17,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".GenericChecker"
+            android:label="ScChecker">
+        </activity>
+        <activity
+            android:name=".LocationChecker"
+            android:label="ScLocationService">
+        </activity>
+        <activity
+            android:name=".NetworkChecker"
+            android:label="ScNetworkService">
         </activity>
     </application>
 
