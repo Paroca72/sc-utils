@@ -1,5 +1,5 @@
 # ScObserver
-A custom observer attachable to a generic class.
+A custom observer attachable to a generic class.<br />
 This classes hold all the value generated from the (public and protected) methods of the source class.
 Note tha NOT all methods can be taken but will be filtered the method that return no value (`void`) and method that needed of parameters.
 This class is better to use only in generic situation.
