@@ -1,9 +1,7 @@
 package com.sccomponents.utils.demo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.sccomponents.utils.ScChecker;
@@ -11,7 +9,6 @@ import com.sccomponents.utils.ScChecker;
 public class GenericChecker extends AppCompatActivity {
 
     // Holder
-    private MyChecker mChecker = null;
     private TextView mText = null;
 
     @Override
@@ -24,11 +21,11 @@ public class GenericChecker extends AppCompatActivity {
         this.mText = (TextView) this.findViewById(R.id.text1);
 
         // Create the checker
-        this.mChecker = new MyChecker(this);
+        MyChecker checker = new MyChecker(this);
         // Check every 3 seconds
-        this.mChecker.setCheckRate(3000);
+        checker.setCheckRate(3000);
         // Listener
-        this.mChecker.setCheckerListener(new ScChecker.CheckerListener() {
+        checker.setCheckerListener(new ScChecker.CheckerListener() {
             @Override
             public void onSuccess() {
                 // If the check return true
@@ -49,7 +46,7 @@ public class GenericChecker extends AppCompatActivity {
         });
 
         // Start to check
-        this.mChecker.start();
+        checker.start();
     }
 
     // Write on screen
