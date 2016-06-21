@@ -31,7 +31,7 @@ android {
 ...
 dependencies {
     ...
-    compile 'com.github.paroca72:sc-utils:1.0.0'
+    compile 'com.github.paroca72:sc-utils:1.1.0'
 }
 ```
 
