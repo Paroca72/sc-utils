@@ -7,40 +7,12 @@ For have a complete control of the class changes I can suggest to look into Obse
 
 #### Methods
 
-- **boolean isChanged() **<br />
+- **boolean isChanged()**<br />
 Check if have some changes and update the current status.
 
 - **void exclude(String... methodsName)**<br />
 Exclude the methods passed from checking
 
-
-### Listener
-```java
-    public interface CheckerListener {
-
-        void onSuccess();
-
-        void onFail();
-
-        void onChangeState(boolean result);
-        
-    }
-```
-
-
-### Overridable methods
-Since this class must be extended you can override some methods for your scope. 
-
-- **public void onSuccess()**<br />
-Called on success (when <code>check()</code> methods return <code>true</code>).
-- **public void onFail()**<br />
-Called on fail (when <code>check()</code> methods return <code>false</code>).
-- **public void onChangeState(boolean result)**<br />
-Called on status change. The <code>result</code> variable contain the <code>check()</code> returned value.
-
-
-### Example
-For an example please take a look the demo section in the project structure.
 
 #License
 <pre>
