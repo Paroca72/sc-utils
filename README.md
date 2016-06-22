@@ -17,21 +17,20 @@ A custom observer attachable to a generic class.
 # Usage
 
 via Gradle:
+1 - Add it in your root build.gradle at the end of repositories:
 ```java
-android {
-    ...
-    buildTypes {
-        ...
-        repositories {
-            ...
-            maven { url "https://jitpack.io" }
-        }
-    }
+allprojects {
+	repositories {
+		...
+		maven { url "https://jitpack.io" }
+	}
 }
-...
+```
+2 - Add the dependency
+```java
 dependencies {
     ...
-    compile 'com.github.paroca72:sc-utils:1.1.0'
+    compile 'com.github.paroca72:sc-widgets:1.0.0'
 }
 ```
 
