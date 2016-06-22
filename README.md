@@ -17,8 +17,8 @@ A custom observer attachable to a generic class.
 # Usage
 
 via Gradle:
-
-1. Add it in your root build.gradle at the end of repositories:
+<br />
+Add it in your root build.gradle at the end of repositories:
 ```java
 allprojects {
 	repositories {
@@ -28,7 +28,7 @@ allprojects {
 }
 ```
 
-2. Add the dependency
+Add the dependency
 ```java
 dependencies {
     ...
