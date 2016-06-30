@@ -13,6 +13,9 @@ Retrieve the connectivity manager and for maintain checked the connectivity stat
 - **[ScObserver](ScObserver.md)**<br />
 A custom observer attachable to a generic class.
 
+- **[ScPathMeasure](ScPathMeasure.md)**<br />
+Extend the PathMeasure because the original class not consider the contours in its totality.
+
 
 # Usage
 
@@ -31,7 +34,7 @@ android {
 ...
 dependencies {
     ...
-    compile 'com.github.paroca72:sc-utils:1.1.0'
+    compile 'com.github.paroca72:sc-utils:1.2.0'
 }
 ```
 
