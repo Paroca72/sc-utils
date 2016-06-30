@@ -35,7 +35,7 @@ Add the dependency
 ```java
 dependencies {
     ...
-    compile 'com.github.paroca72:sc-utils:1.2.0'
+    compile 'com.github.paroca72:sc-utils:1.2.1'
 }
 ```
 

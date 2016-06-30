@@ -308,7 +308,7 @@ public class ScPathMeasure extends PathMeasure {
      * @return the path boundaries
      */
     @SuppressWarnings("unused")
-    protected RectF getBounds() {
+    public RectF getBounds() {
         return this.mBounds;
     }
 
