@@ -20,18 +20,19 @@ Extend the PathMeasure because the original class not consider the contours in i
 # Usage
 
 via Gradle:
+<br />
+Add it in your root build.gradle at the end of repositories:
 ```java
-android {
-    ...
-    buildTypes {
-        ...
-        repositories {
-            ...
-            maven { url "https://jitpack.io" }
-        }
-    }
+allprojects {
+	repositories {
+		...
+		maven { url "https://jitpack.io" }
+	}
 }
-...
+```
+
+Add the dependency
+```java
 dependencies {
     ...
     compile 'com.github.paroca72:sc-utils:1.2.0'
