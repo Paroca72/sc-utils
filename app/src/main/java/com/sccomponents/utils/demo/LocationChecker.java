@@ -25,24 +25,66 @@ public class LocationChecker extends AppCompatActivity {
         this.mService.setCheckerListener(new ScChecker.CheckerListener() {
             @Override
             public void onSuccess() {
-                // Do nothing
+                // Write
+                LocationChecker.this.writeStatus();
             }
 
             @Override
             public void onFail() {
-                // Do nothing
+                // Write
+                LocationChecker.this.writeStatus();
             }
 
             @Override
             public void onChangeState(boolean result) {
-                // Write
-                LocationChecker.this.write();
+                // Do nothing
             }
         });
-        this.mService.startLocationTracking(new LocationListener() {
+
+        // Write the initial status
+        this.writeStatus();
+
+        // Start
+        this.mService.start(new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+                // Write
+                LocationChecker.this.writeLocation(location);
+            }
+        });
+    }
+
+    // Write the current status
+    private void writeStatus() {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Network
+                TextView network = (TextView) LocationChecker.this.findViewById(R.id.txtNetwork);
+                assert network != null;
+                network.setText(LocationChecker.this.mService.isNetworkEnabled() ? "ON" : "OFF");
+
+                // GPS
+                TextView gps = (TextView) LocationChecker.this.findViewById(R.id.txtGPS);
+                assert gps != null;
+                gps.setText(LocationChecker.this.mService.isGPSEnabled() ? "ON" : "OFF");
+
+                // GPS
+                TextView available = (TextView) LocationChecker.this.findViewById(R.id.txtAvailable);
+                assert available != null;
+                available.setText(LocationChecker.this.mService.check() ? "YES" : "NO");
+            }
+        });
+    }
+
+    // Write the current location
+    private void writeLocation(final Location location) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
                 TextView text = (TextView) LocationChecker.this.findViewById(R.id.txtLocation);
+                assert text != null;
+
                 if (location == null) {
                     text.setText("Unknown location");
                 } else {
@@ -50,24 +92,6 @@ public class LocationChecker extends AppCompatActivity {
                 }
             }
         });
-
-        // Write
-        this.write();
-    }
-
-    // Write the current status
-    private void write() {
-        // Network
-        TextView network = (TextView) this.findViewById(R.id.txtNetwork);
-        network.setText(this.mService.isNetworkEnabled() ? "ON" : "OFF");
-
-        // GPS
-        TextView gps = (TextView) this.findViewById(R.id.txtGPS);
-        gps.setText(this.mService.isGPSEnabled() ? "ON" : "OFF");
-
-        // GPS
-        TextView available = (TextView) this.findViewById(R.id.txtAvailable);
-        available.setText(this.mService.check() ? "YES" : "NO");
     }
 
 }

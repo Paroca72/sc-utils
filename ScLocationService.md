@@ -16,19 +16,12 @@ Return the connectivity manager when available.
 <code>true</code> if able to find the location by the GPS.
 - **boolean check()**<br />
 <code>true</code> if is possible to retrieve the current location.
-- **boolean isLocationTrackerEnabled()**<br />
-Check if the location tracker is enabled
-- **boolean isGoogleAPIAvailable()**<br />
-Check is the google API is available.
-The google API needed for the focused location tracker.
-- **void startLocationTracking(LocationListener listener)**<br />
-Start the location tracking.
-- **void stopLocationTracking()**<br />
-Stop the location tracking.
 - **Location getLocation()**<br />
 Get the last known location.
 - **LocationRequest getLocationRequest()**<br />
 Get the location request settings object.
+- **void start(LocationListener listener)**<br />
+Start to tracking the location changes.
 
 
 ### Example

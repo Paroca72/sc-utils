@@ -23,7 +23,7 @@ import com.google.android.gms.location.LocationServices;
  * Call the function NetworkService or GPS for check the current status or call check get true is
  * at least one connection is alive.
  * <p/>
- * v2.0.0
+ * v3.0.0
  */
 public class ScLocationService
         extends ScChecker {
@@ -55,9 +55,11 @@ public class ScLocationService
         this.mLocationRequest = new LocationRequest();
         this.mStartingLocationTracking = false;
 
-        // Request the permission
+        // Check
         this.requestPermissions();
-        // Initialize the google API client
+        this.isGoogleAPIAvailable();
+
+        // Initialize
         this.initializeGoogleAPIClient();
     }
 
@@ -65,6 +67,39 @@ public class ScLocationService
     /**********************************************************************************
      * Private methods
      */
+
+    /*
+     * Check is the google API is available.
+     * The google API needed for the focused location tracker.
+     */
+    private boolean isGoogleAPIAvailable() {
+        // Check for empty values
+        if (this.mContext == null) return false;
+
+        // Get the google API checker
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        // Request if the play service is available and hold the result
+        int result = googleAPI.isGooglePlayServicesAvailable(this.mContext);
+        // If success
+        if (result == ConnectionResult.SUCCESS) {
+            // Continue
+            return true;
+        }
+        // If not available
+        else {
+            // Check if possible to have a resolution
+            if (googleAPI.isUserResolvableError(result) && this.mContext instanceof Activity) {
+                // Open the error dialog
+                googleAPI.getErrorDialog(
+                        (Activity) this.mContext,
+                        result,
+                        ScLocationService.CONNECTION_FAILURE_RESOLUTION_REQUEST
+                ).show();
+            }
+            // Return
+            return false;
+        }
+    }
 
     // Request user permission
     private void requestPermissions() {
@@ -188,78 +223,6 @@ public class ScLocationService
      * Location tracking
      */
 
-    // Check if the location tracker is enabled
-    @SuppressWarnings("unused")
-    public boolean isLocationTrackerEnabled() {
-        // Check for empty value
-        if (ScLocationService.mGoogleApiClient != null) {
-            return ScLocationService.mGoogleApiClient.isConnected();
-        }
-        // Return false
-        return false;
-    }
-
-    /*
-     * Check is the google API is available.
-     * The google API needed for the focused location tracker.
-     */
-    @SuppressWarnings("unused")
-    public boolean isGoogleAPIAvailable() {
-        // Check for empty values
-        if (this.mContext == null) return false;
-
-        // Get the google API checker
-        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
-        // Request if the play service is available and hold the result
-        int result = googleAPI.isGooglePlayServicesAvailable(this.mContext);
-        // If success
-        if (result == ConnectionResult.SUCCESS) {
-            // Continue
-            return true;
-        }
-        // If not available
-        else {
-            // Check if possible to have a resolution
-            if (googleAPI.isUserResolvableError(result) && this.mContext instanceof Activity) {
-                // Open the error dialog
-                googleAPI.getErrorDialog(
-                        (Activity) this.mContext,
-                        result,
-                        ScLocationService.CONNECTION_FAILURE_RESOLUTION_REQUEST
-                ).show();
-            }
-            // Return
-            return false;
-        }
-    }
-
-    // Start the location tracking
-    @SuppressWarnings("unused")
-    public void startLocationTracking(LocationListener listener) {
-        // Hold the listener and set the trigger
-        this.mLocationListener = listener;
-        this.mStartingLocationTracking = true;
-
-        // Check for the connection
-        if (!ScLocationService.mGoogleApiClient.isConnected()) {
-            // Try to connect and the tracker will attached once the connection will done
-            ScLocationService.mGoogleApiClient.connect();
-        }
-        // Else attach the location tracker directly
-        else {
-            this.internalStartLocationTracking();
-        }
-    }
-
-    // Stop the location tracking
-    @SuppressWarnings("unused")
-    public void stopLocationTracking() {
-        // Stop the tracking
-        this.internalStopLocationTracking();
-        // Stop the service
-        ScLocationService.mGoogleApiClient.disconnect();
-    }
-
     // Get the last known location
     @SuppressWarnings("unused")
     public Location getLocation() {
@@ -286,7 +249,7 @@ public class ScLocationService
 
 
     /**********************************************************************************
-     * Override
+     * Override and overloads
      */
 
     // Override the check function.
@@ -294,8 +257,43 @@ public class ScLocationService
     @Override
     @SuppressWarnings("unused")
     public boolean check() {
-        // Return the current status
-        return this.isGPSEnabled() || this.isNetworkEnabled();
+        // Check for empty value
+        if (ScLocationService.mGoogleApiClient != null) {
+            return ScLocationService.mGoogleApiClient.isConnected();
+        }
+        // Return false
+        return false;
+    }
+
+    // Overload start methods
+    @SuppressWarnings("unused")
+    public void start(LocationListener listener) {
+        // Hold the listener and set the trigger
+        this.mLocationListener = listener;
+        this.mStartingLocationTracking = true;
+
+        // Check for the connection
+        if (!ScLocationService.mGoogleApiClient.isConnected()) {
+            // Try to connect and the tracker will attached once the connection will done
+            ScLocationService.mGoogleApiClient.connect();
+        }
+        // Else attach the location tracker directly
+        else {
+            this.internalStartLocationTracking();
+        }
+
+        // Super
+        super.start();
+    }
+
+    @Override
+    public void stop() {
+        // Super
+        super.stop();
+
+        // Stop the tracking
+        this.internalStopLocationTracking();
+        ScLocationService.mGoogleApiClient.disconnect();
     }
 
 }
