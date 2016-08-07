@@ -2,7 +2,10 @@
 This class can be used for retrieve the location manager and for maintain checked the location accessibility.
 This class inherit from the [ScChecker](ScChecker.md).
 <br />
+Now base on <code>FusedLocationApi</code> can tracking the location updates using <code>startLocationTracking(...)</code> method.
+<br />
 Through the listener implementation you can know when the location accessibility status changed.
+
 
 #### Methods
 - **ConnectivityManager getConnectivityManager()**<br />
@@ -13,6 +16,20 @@ Return the connectivity manager when available.
 <code>true</code> if able to find the location by the GPS.
 - **boolean check()**<br />
 <code>true</code> if is possible to retrieve the current location.
+- **boolean isLocationTrackerEnabled()**<br />
+Check if the location tracker is enabled
+- **boolean isGoogleAPIAvailable()**<br />
+Check is the google API is available.
+The google API needed for the focused location tracker.
+- **void startLocationTracking(LocationListener listener)**<br />
+Start the location tracking.
+- **void stopLocationTracking()**<br />
+Stop the location tracking.
+- **Location getLocation()**<br />
+Get the last known location.
+- **LocationRequest getLocationRequest()**<br />
+Get the location request settings object.
+
 
 ### Example
 For an example please take a look the demo section in the project structure.

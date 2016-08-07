@@ -1,9 +1,11 @@
 package com.sccomponents.utils.demo;
 
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.android.gms.location.LocationListener;
 import com.sccomponents.utils.ScChecker;
 import com.sccomponents.utils.ScLocationService;
 
@@ -35,6 +37,17 @@ public class LocationChecker extends AppCompatActivity {
             public void onChangeState(boolean result) {
                 // Write
                 LocationChecker.this.write();
+            }
+        });
+        this.mService.startLocationTracking(new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                TextView text = (TextView) LocationChecker.this.findViewById(R.id.txtLocation);
+                if (location == null) {
+                    text.setText("Unknown location");
+                } else {
+                    text.setText(location.getLatitude() + " : " + location.getLongitude());
+                }
             }
         });
 
