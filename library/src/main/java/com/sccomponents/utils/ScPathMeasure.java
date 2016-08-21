@@ -282,7 +282,8 @@ public class ScPathMeasure extends PathMeasure {
 
         } while (this.nextContour());
 
-        // Return
+        // Reset the contours and return the result
+        super.setPath(this.mPath, this.mForceClosed);
         return list.toArray(new Path[list.size()]);
     }
 
